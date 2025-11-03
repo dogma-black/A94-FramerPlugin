@@ -1,0 +1,408 @@
+[
+  {
+    "feature": "Plataforma Framer",
+    "description": "Framer es una herramienta de diseño no-code para prototipar y publicar sitios web completos de manera visual. Combina diseño gráfico con la potencia del código, permitiendo personalización detallada. Está dirigido a diseñadores UX/UI, desarrolladores no-code, agencias y startups.",
+    "concepts": [
+      {
+        "name": "Interfaz de Usuario",
+        "description": "La interfaz es similar a Figma, con un Canvas central, un panel de capas a la izquierda y un panel de propiedades a la derecha."
+      },
+      {
+        "name": "Flujo de Trabajo Colaborativo",
+        "description": "Framer es una herramienta basada en el navegador, lo que facilita el trabajo colaborativo con otros miembros del equipo."
+      },
+      {
+        "name": "SEO Amigable",
+        "description": "Incluye herramientas integradas para la optimización en motores de búsqueda."
+      },
+      {
+        "name": "Integración con Figma",
+        "description": "Se utiliza el plugin 'Figma to HTML with Framer' para copiar diseños de Figma y pegarlos en el Canvas de Framer. Las interacciones y variantes deben recrearse manualmente en Framer.",
+        "notes": "Para una correcta importación, el diseño en Figma debe estar estructurado con auto layout y componentes."
+      }
+    ]
+  },
+  {
+    "feature": "Componentes en Framer",
+    "description": "Son los bloques de construcción fundamentales en Framer. Permiten crear un elemento una vez (ej. un botón) y reutilizarlo, asegurando consistencia. Al editar el componente maestro, los cambios se reflejan automáticamente en todas sus instancias.",
+    "types": [
+      {
+        "name": "Componentes Visuales",
+        "description": "Elementos de UI estáticos o interactivos creados con las herramientas de diseño de Framer."
+      },
+      {
+        "name": "Smart Components (Componentes Inteligentes)",
+        "description": "Componentes con estados (hover, pressed) y variantes predefinidas que reaccionan a la interacción del usuario. Permiten crear interacciones complejas sin código."
+      },
+      {
+        "name": "Nested Components (Componentes Anidados)",
+        "description": "La práctica de construir componentes complejos utilizando otros componentes más simples como bloques de construcción. Por ejemplo, una barra de navegación que contiene instancias de un componente de botón."
+      },
+      {
+        "name": "Code Components (Componentes de Código)",
+        "description": "Componentes de React personalizados creados directamente en Framer para extender su funcionalidad más allá de las herramientas visuales. Requieren conocimientos de React y JavaScript."
+      }
+    ],
+    "concepts": [
+      {
+        "name": "Variantes (Variants)",
+        "description": "Permiten crear diferentes versiones o 'estados' visuales de un mismo componente (ej. 'Default', 'Pill', 'Rounded'). También se usan para estados interactivos como 'Hover' y 'Pressed'."
+      },
+      {
+        "name": "Variables",
+        "description": "Permiten que cada instancia de un componente sea única sin desvincularla del maestro. Conectan las propiedades de los elementos internos de un componente (como texto, color o visibilidad) a controles en el panel de propiedades de la instancia.",
+        "types": [
+          "Texto Plano (Plain Text)",
+          "Texto Formateado (Formatted Text)",
+          "Enlace (Link)",
+          "Color",
+          "Imagen",
+          "Toggle (Booleano)",
+          "Número",
+          "Opción",
+          "Evento"
+        ]
+      },
+      {
+        "name": "Variables de Pila (Stack Variables)",
+        "description": "Permiten convertir propiedades de layout como Gap, Padding, Direction, Distribute y Align en controles personalizables, haciendo los componentes más flexibles y fáciles de controlar, incluso a través del CMS."
+      },
+      {
+        "name": "Interacciones entre Componentes (Cross-Component Interactions)",
+        "description": "Permite crear interacciones entre componentes que no están directamente anidados, configurando un elemento como 'Trigger' y otro como 'Target', vinculándolos con un ID único."
+      }
+    ]
+  },
+  {
+    "feature": "Code Components (Componentes de Código)",
+    "api": "addPropertyControls",
+    "description": "Son componentes de React personalizados que se escriben directamente en el editor de código de Framer. Permiten crear elementos completamente nuevos con lógica y comportamientos complejos, como integraciones con APIs externas. Para que los usuarios puedan personalizarlos desde la interfaz de Framer, se usan los Property Controls.",
+    "requirements": "Entender JavaScript, luego React, y finalmente cómo funciona el ecosistema de Framer.",
+    "concepts": [
+      {
+        "name": "Property Controls",
+        "description": "Permiten exponer las props de un componente de React a la interfaz de Framer, haciéndolo personalizable para no programadores. Se definen con la función `addPropertyControls`.",
+        "example": {
+          "code": "import { addPropertyControls, ControlType } from \"framer\"\n\nexport function MyComponent(props) {\n return <div>{props.text}</div>\n}\n\nMyComponent.defaultProps = {\n text: \"Hello World!\",\n}\n\naddPropertyControls(MyComponent, {\n text: { type: ControlType.String, title: \"Hello World\" },\n})",
+          "notes": "Esta función se llama fuera de la definición del componente. El primer argumento es el nombre del componente, el segundo es un objeto que define cada control."
+        }
+      },
+      {
+        "name": "Workshop (IA)",
+        "description": "Una funcionalidad de Framer que utiliza IA (similar a ChatGPT) para generar componentes de código funcionales a partir de descripciones de texto (prompts). El proceso suele ser iterativo para refinar el resultado."
+      },
+      {
+        "name": "Auto Sizing",
+        "description": "Define cómo se comporta el tamaño de un componente en el lienzo. Se configura mediante anotaciones especiales en el código, como `@framerSupportedLayoutWidth` y `@framerSupportedLayoutHeight`.",
+        "options": ["auto", "fixed", "any", "any-prefer-fixed"],
+        "example": {
+          "code": "/**\n * @framerSupportedLayoutWidth auto\n * @framerSupportedLayoutHeight fixed\n */\nexport function Toggle(props) { … }"
+        }
+      },
+      {
+        "name": "Sharing Components",
+        "description": "Cada componente de código tiene una URL única que se puede compartir y pegar en otros proyectos de Framer para reutilizarlo. La URL puede apuntar a la última versión o a una versión específica.",
+        "example": {
+          "code": "https://framer.com/m/Button-5TDo.js@rXSyWUm5fMakCtp8K3gM",
+          "notes": "Para obtener la URL, se hace clic con el botón derecho en el componente en el panel de Activos y se selecciona 'Copiar URL...'"
+        }
+      }
+    ]
+  },
+  {
+    "feature": "Property Controls (Controles de Propiedad)",
+    "api": "addPropertyControls, ControlType",
+    "description": "Permiten a los usuarios pasar propiedades (props) a un componente de código a través de la interfaz de Framer. Se definen usando la función `addPropertyControls` y los tipos de `ControlType`.",
+    "controlTypes": [
+      {
+        "type": "ControlType.Array",
+        "description": "Permite crear una lista de controles del mismo tipo, como una galería de imágenes o una lista de objetos con sus propias propiedades."
+      },
+      {
+        "type": "ControlType.Boolean",
+        "description": "Un interruptor (checkbox o toggle) para valores `true` o `false`."
+      },
+      {
+        "type": "ControlType.Color",
+        "description": "Un selector de color que devuelve el valor como una cadena `rgb()` o `rgba()`."
+      },
+      {
+        "type": "ControlType.ComponentInstance",
+        "description": "Permite anidar otros componentes de Framer dentro de un componente de código. Es la base de la propiedad `children`."
+      },
+      {
+        "type": "ControlType.Date",
+        "description": "Un selector de fecha y hora."
+      },
+      {
+        "type": "ControlType.Enum",
+        "description": "Una lista desplegable o un control segmentado para elegir entre un conjunto de opciones predefinidas."
+      },
+      {
+        "type": "ControlType.EventHandler",
+        "description": "Crea un conector de eventos en Framer, permitiendo que el componente active interacciones visuales."
+      },
+      {
+        "type": "ControlType.File",
+        "description": "Permite seleccionar un archivo del proyecto, como un video. Devuelve la URL del archivo."
+      },
+      {
+        "type": "ControlType.ResponsiveImage",
+        "description": "Un selector de imágenes que proporciona un objeto con `src`, `srcSet` y `alt`."
+      },
+      {
+        "type": "ControlType.Number",
+        "description": "Un campo numérico, que puede mostrarse como un control deslizante (slider) o un stepper."
+      },
+      {
+        "type": "ControlType.Object",
+        "description": "Agrupa múltiples controles dentro de un solo objeto."
+      },
+      {
+        "type": "ControlType.String",
+        "description": "Un campo de texto simple o un área de texto (`displayTextArea`)."
+      },
+      {
+        "type": "ControlType.Transition",
+        "description": "Un control para configurar las transiciones de Framer Motion (tipo, duración, etc.)."
+      },
+      {
+        "type": "ControlType.Link",
+        "description": "Un campo para introducir una URL o seleccionar una página interna del sitio."
+      },
+      {
+        "type": "ControlType.Padding",
+        "description": "Un control para definir el `padding` de un elemento."
+      },
+      {
+        "type": "ControlType.BorderRadius",
+        "description": "Un control para definir el `border-radius` de un elemento."
+      },
+      {
+        "type": "ControlType.Border",
+        "description": "Un control para definir las propiedades de borde (ancho, estilo, color)."
+      },
+      {
+        "type": "ControlType.BoxShadow",
+        "description": "Un control para definir sombras de caja (`box-shadow`)."
+      }
+    ]
+  },
+  {
+    "feature": "Code Overrides (Anulaciones de Código)",
+    "description": "Son 'Componentes de Orden Superior' (Higher-Order Components) de React que permiten modificar las propiedades de componentes o capas existentes en el lienzo de forma no destructiva. Son ideales para añadir interactividad y comportamientos complejos a elementos ya diseñados sin crear variantes adicionales.",
+    "whenToUse": [
+      "Añadir atributos de datos (`data-xx`).",
+      "Seguimiento de eventos de clic (`onClick`).",
+      "Modificar dinámicamente el contenido de texto.",
+      "Gestionar estado compartido entre componentes."
+    ],
+    "example": {
+      "code": "import { forwardRef, type ComponentType } from \"react\"\n\nexport const withLowerOpacity = (Component): ComponentType => {\n return forwardRef((props, ref) => {\n  return <Component ref={ref} {…props} style={{ …props.style, opacity: 0.5 }} />\n })\n}",
+      "notes": "Una anulación es una función que recibe un componente como argumento y devuelve un nuevo componente con propiedades modificadas. Se aplica desde el panel de propiedades a cualquier capa del lienzo."
+    }
+  },
+  {
+    "feature": "Framer Motion",
+    "description": "Una biblioteca de animación de código abierto para React, diseñada para crear animaciones fluidas, dinámicas y de alto rendimiento. Es la tecnología que impulsa las interacciones avanzadas en Framer.",
+    "coreConcepts": [
+      {
+        "name": "motion component",
+        "description": "Es la base de la biblioteca. Se utiliza como un prefijo para cualquier elemento HTML o SVG (ej. `motion.div`) para dotarlo de propiedades de animación.",
+        "example": {
+          "code": "<motion.div\n  initial={{ opacity: 0, scale: 0.5 }}\n  animate={{ opacity: 1, scale: 1 }}\n  transition={{ duration: 0.5 }}\n/>",
+          "notes": "Las animaciones se definen de forma declarativa mediante propiedades."
+        }
+      },
+      {
+        "name": "Animation Properties",
+        "properties": [
+          {"prop": "initial", "description": "Define el estado inicial del componente antes de que comience la animación."},
+          {"prop": "animate", "description": "Define el estado final o el estado activo de la animación."},
+          {"prop": "exit", "description": "Define cómo debe animarse el componente al salir del DOM (se usa con AnimatePresence)."},
+          {"prop": "transition", "description": "Controla la física de la animación (duración, retraso, tipo `spring` o `tween`, etc.)."},
+          {"prop": "whileHover / whileTap / whileInView", "description": "Gestos que definen el estado de animación cuando el ratón está sobre el elemento, cuando se presiona, o cuando es visible en el viewport."},
+          {"prop": "variants", "description": "Conjuntos de animaciones que se declaran de forma declarativa y se aplican a los hijos de un componente, permitiendo animaciones escalonadas (`staggerChildren`)."}
+        ]
+      },
+      {
+        "name": "AnimatePresence",
+        "description": "Un componente contenedor que permite que los elementos anidados apliquen su animación `exit` cuando son eliminados del árbol del DOM, crucial para animaciones de entrada y salida."
+      }
+    ],
+    "hooks": [
+      {
+        "name": "useMotionValue",
+        "description": "Crea un valor especial (MotionValue) que puede seguir el estado y la velocidad de un valor animado sin necesidad de volver a renderizar el componente. Es ideal cuando existe un 'vínculo lógico' entre diferentes valores.",
+        "useCase": "Vincular la posición `x` de un elemento arrastrable a su rotación o color."
+      },
+      {
+        "name": "useTransform",
+        "description": "Crea un nuevo MotionValue que transforma la salida de otro. Por ejemplo, mapear un rango de posiciones `x` a un rango de valores de opacidad.",
+        "useCase": "Se usa en conjunto con `useMotionValue` para crear animaciones reactivas y compuestas."
+      },
+      {
+        "name": "useAnimation",
+        "description": "Proporciona controles imperativos (`start`, `stop`) para iniciar animaciones de forma programática. Ofrece máxima flexibilidad.",
+        "useCase": "Orquestar secuencias de animación complejas o cuando las animaciones deben ser controladas por eventos externos al componente."
+      }
+    ]
+  },
+  {
+    "feature": "Plugins API",
+    "description": "Los plugins son pequeñas aplicaciones que se ejecutan dentro del Editor de Framer y pueden interactuar programáticamente con el lienzo, el CMS y otras características a través de la API `framer`.",
+    "architecture": "Un plugin es un sitio web que se ejecuta en un iframe seguro. Se puede mostrar una interfaz de usuario con `framer.showUI()` o ejecutarse sin ella.",
+    "mainApis": [
+      {
+        "name": "Navigation API",
+        "functions": ["node.navigateTo()"],
+        "description": "Navegar por la interfaz de usuario a un nodo del lienzo, un elemento del CMS o un archivo de código."
+      },
+      {
+        "name": "Canvas API",
+        "functions": ["createFrameNode()", "removeNode()", "setAttributes()", "getSelection()"],
+        "description": "Añadir, manipular y eliminar cualquier capa (nodo) en el lienzo."
+      },
+      {
+        "name": "CMS API",
+        "functions": ["getActiveCollection()", "getCollections()", "addItems()", "setFields()"],
+        "description": "Interactuar con las colecciones del CMS, tanto las creadas por el usuario como las gestionadas por el plugin."
+      },
+      {
+        "name": "Assets API",
+        "functions": ["addImage()", "uploadImage()", "addSVG()"],
+        "description": "Añadir y manipular activos como imágenes y SVG."
+      },
+      {
+        "name": "Code File API",
+        "functions": ["createCodeFile()", "getCodeFiles()", "setFileContent()"],
+        "description": "Crear, leer y actualizar archivos de código (componentes y anulaciones) dentro de un proyecto."
+      },
+      {
+        "name": "Permissions API",
+        "functions": ["isAllowedTo()", "useIsAllowedTo()"],
+        "description": "Verificar si el usuario actual tiene permisos para realizar ciertas acciones."
+      }
+    ],
+    "setup": {
+      "command": "npm create framer-plugin@latest",
+      "notes": "Este comando inicializa un nuevo proyecto de plugin con la estructura y dependencias necesarias."
+    }
+  },
+  {
+    "feature": "CMS (Content Management System)",
+    "description": "Framer incluye un CMS integrado que funciona como una base de datos para agregar y gestionar contenido dinámico (como artículos de blog o listados de productos) sin editar el diseño del sitio. El contenido se vincula a los componentes a través de variables.",
+    "concepts": [
+      {
+        "name": "Collections (Colecciones)",
+        "description": "Son las tablas o bases de datos del CMS. Pueden ser no gestionadas (creadas por el usuario) o gestionadas (controladas por un plugin)."
+      },
+      {
+        "name": "Fields (Campos)",
+        "description": "Son las columnas de una colección, que definen el tipo de dato (texto, imagen, número, etc.)."
+      },
+      {
+        "name": "Items (Artículos)",
+        "description": "Son las filas de una colección, cada una representando una entrada de contenido."
+      },
+      {
+        "name": "Relaciones",
+        "description": "El CMS permite establecer relaciones entre diferentes colecciones (usando los tipos de campo `collectionReference` o `multiCollectionReference`) para evitar la duplicación de datos."
+      }
+    ],
+    "fieldTypes": [
+      "boolean",
+      "color",
+      "number",
+      "string",
+      "imageAsset",
+      "fileAsset",
+      "link",
+      "date",
+      "enum",
+      "collectionReference",
+      "multiCollectionReference",
+      "array (para Galerías)"
+    ]
+  },
+  {
+    "feature": "Fetch Data",
+    "description": "Permite recuperar datos de una API externa y usarlos en un sitio de Framer sin código. Los datos se pueden vincular a capas de texto, imágenes y otras propiedades de los componentes.",
+    "useCase": "Mostrar información en vivo como el clima, datos de un inventario, o contenido personalizado basado en la ubicación del usuario.",
+    "setup": "Requiere un punto final de API (backend) que devuelva datos en formato JSON y tenga configurado correctamente el CORS (`Access-Control-Allow-Origin`).",
+    "example": {
+      "code": "async function worker() {\n  const data = await fetch(\"https://api.fetch.tools/status\")\n  const status = await data.json()\n\n  // …CORS Headers …\n\n  return new Response(JSON.stringify(status));\n}",
+      "notes": "Este es un ejemplo de una función de backend simple que envuelve una API externa. Framer hará una solicitud GET a la URL de esta función."
+    }
+  },
+  {
+    "feature": "Integraciones",
+    "description": "Framer permite la integración con varias herramientas de terceros, ya sea a través de componentes incorporados, el componente de incrustación (Embed) o añadiendo scripts en la configuración del sitio (Custom Code).",
+    "integrations": [
+      {
+        "name": "Formularios",
+        "tools": ["HubSpot", "Marketo", "Mailchimp", "Typeform", "Formspark", "Clay"],
+        "method": "La mayoría utiliza un componente pre-construido que se arrastra al lienzo y se configura pegando un ID de formulario o una URL obtenida del servicio correspondiente."
+      },
+      {
+        "name": "Webhooks para Formularios Nativos",
+        "description": "Los formularios nativos de Framer pueden enviar los datos a un webhook. Esto permite conectar los envíos con cualquier servicio que acepte solicitudes HTTP POST, como Zapier, un backend personalizado o una base de datos.",
+        "security": "Se puede asegurar el webhook con un secreto y verificar las solicitudes usando las cabeceras `Framer-Signature` y `Framer-Webhook-Submission-Id`."
+      },
+      {
+        "name": "Análisis y Seguimiento",
+        "tools": ["Google Analytics", "Google Tag Manager", "Meta Pixel", "Hotjar"],
+        "method": "Se configura pegando el ID de medición (para Google Analytics) en la configuración del sitio, o pegando el script de seguimiento completo en la sección de Código Personalizado (`<head>` o `<body>`)."
+      },
+      {
+        "name": "Widgets y Contenido Incrustado",
+        "tools": ["Intercom", "Loom", "Trustpilot"],
+        "method": "Intercom usa un componente incorporado. Otros como Loom o Trustpilot se integran usando el componente 'Embed' y pegando el código HTML proporcionado por el servicio."
+      }
+    ]
+  },
+  {
+    "feature": "Publicación y Flujo de Trabajo",
+    "description": "Procesos para publicar un sitio web y entregarlo a clientes.",
+    "concepts": [
+      {
+        "name": "Publicación (Publishing)",
+        "description": "Framer permite publicar sitios con un solo clic. Se genera un dominio gratuito `.framer.website` por defecto."
+      },
+      {
+        "name": "Dominio Personalizado (Custom Domain)",
+        "description": "Requiere un plan de pago. Se conecta añadiendo registros DNS (tipo A y CNAME) proporcionados por Framer en el proveedor de dominios. La propagación puede tardar hasta 48 horas."
+      },
+      {
+        "name": "Staging and Versions",
+        "description": "Permite publicar cambios en una URL de prueba (staging) sin afectar el sitio en vivo. Se puede seleccionar qué versión publicada está 'Live' en el dominio personalizado. Requiere al menos un plan Pro.",
+        "workflow": "Los cambios se publican (Publish) en la URL base de Framer para pruebas. Cuando están listos, se promueve esa versión a 'Live' para que se vea en el dominio personalizado."
+      },
+      {
+        "name": "Entrega a Clientes (Remix Link)",
+        "description": "La forma recomendada de entregar un proyecto. Se genera un 'remix link' que permite al cliente copiar el proyecto completo a su propia cuenta de Framer, dándole total propiedad.",
+        "notes": "El cliente debe tener una cuenta de Framer creada previamente. Los Framer Partners pueden añadir su ID al enlace para obtener una comisión."
+      }
+    ]
+  },
+  {
+    "feature": "Squeeze Pages (Páginas de Compresión)",
+    "description": "Son páginas de destino sin distracciones, diseñadas con un único objetivo: recopilar la información de contacto de los visitantes (generalmente el correo electrónico) a cambio de algo valioso (un lead magnet).",
+    "characteristics": [
+      "Objetivo de conversión único.",
+      "Diseño mínimo sin menús de navegación, enlaces a redes sociales u otras rutas de escape.",
+      "Un 'lead magnet' valioso (ebook, checklist, video de formación).",
+      "Propuesta de valor clara."
+    ],
+    "howToCreate": [
+      "Crear una oferta irresistible.",
+      "Escribir un titular claro y centrado en los beneficios.",
+      "Enfocar la copia en un solo problema y su solución.",
+      "Usar una llamada a la acción (CTA) específica.",
+      "Eliminar todas las distracciones posibles.",
+      "Añadir prueba social (testimonios, logos).",
+      "Utilizar múltiples oportunidades de suscripción en la página.",
+      "Optimizar la página de agradecimiento post-suscripción."
+    ]
+  }
+]

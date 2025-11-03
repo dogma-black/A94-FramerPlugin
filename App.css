@@ -1,0 +1,219 @@
+/* App.css */
+
+:root {
+    --background-color: #1e1e1e;
+    --primary-text-color: #d4d4d4;
+    --secondary-text-color: #a0a0a0;
+    --border-color: #333333;
+    --input-background: #2a2a2a;
+    --button-background: #007acc;
+    --button-hover-background: #005f99;
+    --user-bubble-background: #004f80;
+    --ai-bubble-background: #2a2a2a;
+    --error-bubble-background: #5a1d1d;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+main.container {
+    font-family: var(--font-family);
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full height of the viewport */
+    padding: 0;
+    margin: 0;
+    overflow: hidden; /* Prevent scrolling on the main container */
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.logo {
+    width: 24px;
+    height: 24px;
+    /* TODO: Replace with actual logo */
+    background-color: #007acc; 
+    border-radius: 4px;
+}
+
+.exit-button {
+    background: none;
+    border: none;
+    color: var(--secondary-text-color);
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+.exit-button::before {
+    content: "\00d7"; /* Multiplication sign as an 'X' */
+}
+
+.line-separator {
+    /* This might be redundant if the banner has a border-bottom */
+    height: 1px;
+    background-color: var(--border-color);
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.chat-history {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.text-field {
+    display: flex;
+    padding: 16px;
+    border-top: 1px solid var(--border-color);
+    gap: 8px;
+    align-items: flex-end;
+    flex-shrink: 0;
+}
+
+.prompt-input {
+    flex-grow: 1;
+    background-color: var(--input-background);
+    color: var(--primary-text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 14px;
+    font-family: var(--font-family);
+    resize: none;
+    min-height: 40px;
+    max-height: 120px;
+}
+
+.prompt-input:focus {
+    outline: 1px solid var(--button-background);
+    border-color: var(--button-background);
+}
+
+.send-button {
+    background-color: var(--button-background);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.send-button:hover {
+    background-color: var(--button-hover-background);
+}
+
+.send-button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+/* Placeholder for send icon */
+.send-button::before {
+    content: "\27A4"; /* Black Rightwards Arrowhead */
+    font-size: 18px;
+    transform: rotate(-45deg) translate(1px, -1px);
+}
+
+.text-field-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 2px; /* Align with bottom of textarea */
+}
+
+.icon-button {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--secondary-text-color);
+    border-radius: 6px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Placeholder icons */
+.attach-button::before { content: "+"; }
+.time-button::before { content: "\23F3"; } /* Hourglass */
+.search-button::before { content: "\1F50D"; } /* Magnifying glass */
+.web-button::before { content: "\1F310"; } /* Globe */
+
+/* Chat Bubble Styles */
+.chat-bubble {
+    background-color: var(--ai-bubble-background);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px;
+    max-width: 85%;
+    align-self: flex-start;
+    word-wrap: break-word;
+}
+
+.chat-bubble.user {
+    background-color: var(--user-bubble-background);
+    border-color: var(--button-background);
+    color: #e0e0e0;
+    align-self: flex-end;
+}
+
+.chat-bubble.error {
+    background-color: var(--error-bubble-background);
+    border-color: #a83232;
+}
+
+.chat-bubble pre {
+    margin: 0;
+    white-space: pre-wrap; /* Allow text to wrap */
+    font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
+    font-size: 13px;
+}
+
+.chat-bubble code {
+    font-family: inherit;
+}
+
+.chat-bubble.loading {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.chat-bubble.loading span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--secondary-text-color);
+    animation: bounce 1.4s infinite both;
+}
+
+.chat-bubble.loading span:nth-child(1) { animation-delay: -0.32s; }
+.chat-bubble.loading span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1.0);
+    }
+}
